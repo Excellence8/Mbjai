@@ -7,3 +7,9 @@ __pycache__/
 /logs/
 
 .env
+# ===== 安全相关文件 =====
+.env           # 环境变量文件
+*.secret       # 所有后缀为.secret的文件
+config/credentials.*  # config目录下的credentials文件
+
+venv/

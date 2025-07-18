@@ -33,3 +33,18 @@ if __name__ == "__main__":
     start = time.time()
     asyncio.run(crawl())
     print(f"⏱ 总耗时: {time.time()-start:.2f}秒")
+    import os
+from typing import Optional
+
+def get_api_key() -> Optional[str]:
+    """安全获取API密钥"""
+    key = os.getenv("CRAWL4AI_KEY")
+    if not key:
+        print("警告：未检测到CRAWL4AI_KEY环境变量")
+    return key
+
+# 使用示例
+api_key = get_api_key()
+if not api_key:
+    # 处理密钥缺失情况
+    raise RuntimeError("无法获取API密钥")

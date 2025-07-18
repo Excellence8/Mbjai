@@ -1,0 +1,17 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.python-version
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+*.json
+*.csv
