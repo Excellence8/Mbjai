@@ -1,9 +1,16 @@
-﻿import os
+﻿#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+import os
 import sys
 from pathlib import Path
 
 def debug_file(path):
-    print(f"\n=== 文件调试信息 ===")
+    print("=== File Debug Info ===")
     print(f"绝对路径: {path.resolve()}")
     print("Hex头3字节:", end=' ')
     try:
