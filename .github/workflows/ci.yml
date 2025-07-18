@@ -8,29 +8,40 @@ on:
 
 jobs:
   environment-check:
-    name: Validate Environment
     runs-on: windows-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Set up Python
+    - name: Set up Python 3.8
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: "3.8"
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install python-dotenv
 
-    - name: Run environment check
-      run: python check_env.py
-
-    - name: Verify .env.example
+    - name: Prepare test environment
+      shell: pwsh
       run: |
-        if not exist .env (
-          copy .env.example .env
-          python check_env.py
-        )
+        # 打印调试信息
+        Write-Host "当前目录: $(Get-Location)"
+        Write-Host "PYTHONPATH: $env:PYTHONPATH"
+        
+        # 创建测试用.env文件
+        Copy-Item .env.example .env -Force
+        (Get-Content .env) -replace 'your_crawl4ai_key_here', 'test_key' | Set-Content .env
+        (Get-Content .env) -replace 'jina_your_key_here', 'test_key' | Set-Content .env
+        (Get-Content .env) -replace 'your_api_key_here', 'test_key' | Set-Content .env
+
+        # 验证文件内容
+        Write-Host ".env 文件内容："
+        Get-Content .env
+
+    - name: Run environment check
+      working-directory: ${{ github.workspace }}
+      run: |
+        python -c "import os; print('当前工作目录:', os.getcwd())"
+        python -c "import sys; print('Python路径:', sys.path)"
+        python check_env.py
