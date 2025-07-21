@@ -39,16 +39,16 @@ jobs:
         Write-Host ".env 文件内容："
         Get-Content .env
 
-    - - name: Run environment check
-         shell: pwsh
-         env:
-           PYTHONUTF8: 1  # 关键环境变量
-           PYTHONIOENCODING: utf-8
-         run: |
-           # 显式设置控制台编码
-           [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-           chcp 65001
-    
-           # 运行检查
-           python -c "import os; print('当前工作目录:', os.getcwd())"
-           python check_env.py
+    - name: Run environment check
+      shell: pwsh
+      env:
+        PYTHONUTF8: 1  # 关键环境变量
+        PYTHONIOENCODING: utf-8
+      run: |
+        # 显式设置控制台编码
+        [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+        chcp 65001
+        
+        # 运行检查
+        python -c "import os; print('当前工作目录:', os.getcwd())"
+        python check_env.py
