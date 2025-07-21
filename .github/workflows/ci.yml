@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: [main]
+    branches: [main test-ci]  # 监听这两个分支的推送
   pull_request:
     branches: [main]
   workflow_dispatch:  # 启用手动触发
