@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: [main test-ci]  # 监听这两个分支的推送
+    branches: [main, test-ci]  # 注意这里添加了逗号
   pull_request:
     branches: [main]
   workflow_dispatch:  # 启用手动触发
@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
         with:
