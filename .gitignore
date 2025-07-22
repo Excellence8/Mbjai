@@ -13,3 +13,4 @@ __pycache__/
 config/credentials.*  # config目录下的credentials文件
 
 venv/
+CONTRIBUTING_*.md

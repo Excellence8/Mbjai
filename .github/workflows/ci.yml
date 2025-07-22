@@ -1,15 +1,21 @@
----
-name: "CI Pipeline"
+﻿name: CI Pipeline
 
-on: {}  # 无触发条件
+on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: "actions/checkout@v4"
-      - uses: "actions/setup-python@v4"
-        with:
-          python-version: "3.11"
+    runs-on: windows-latest
 
-# 文件末尾空行（必须保留）
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Validate YAML
+        run: yamllint --config-file .yamllint --strict .github/workflows/
