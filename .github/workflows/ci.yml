@@ -1,19 +1,15 @@
-﻿name: CI Pipeline
+---
+name: "CI Pipeline"
 
-on:
-  push:
-    branches: [main, test-ci]  # 注意这里添加了逗号
-  pull_request:
-    branches: [main]
-  workflow_dispatch:  # 启用手动触发
+on: {}  # 无触发条件
 
 jobs:
-  environment-check:
-    runs-on: windows-latest
+  build:
+    runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
+      - uses: "actions/checkout@v4"
+      - uses: "actions/setup-python@v4"
         with:
-          python-version: "3.8"
+          python-version: "3.11"
+
+# 文件末尾空行（必须保留）
